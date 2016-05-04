@@ -19,19 +19,16 @@ class PangramTest < Minitest::Test
   end
 
   def test_missing_character_x
-    skip
     str = 'a quick movement of the enemy will jeopardize five gunboats'
     refute Pangram.is_pangram?(str)
   end
 
   def test_pangram_with_mixed_case_and_punctuation
-    skip
     str = '"Five quacking Zephyrs jolt my wax bed."'
     assert Pangram.is_pangram?(str)
   end
 
   def test_pangram_with_non_ascii_characters
-    skip
     str = 'Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich.'
     assert Pangram.is_pangram?(str)
   end
