@@ -1,4 +1,3 @@
-
 class Squares
 
   def initialize(num)
@@ -10,17 +9,17 @@ class Squares
   end
 
   def sum_of_squares
-    squared_numbers.reduce(:+)
+    squared_numbers.reduce(:+) || 0
   end
 
   def difference
-    squared_number_differences.reduce(:+)
+    square_of_sum - sum_of_squares
   end
 
   private
 
     def sum
-      numbers.reduce(:+)
+      numbers.reduce(:+) || 0
     end
 
     def numbers
@@ -32,15 +31,8 @@ class Squares
     end
 
     def squared_number_differences
-      previous = nil
-      squared_numbers.map do |num|
-        if previous.nil?
-          previous = num
-          nil
-        else
-          num - previous
-        end
-      end.compact
+      squared_numbers.map { |num| num - @num }
     end
 
+  VERSION = 2
 end
