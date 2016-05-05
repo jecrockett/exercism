@@ -7,5 +7,5 @@ module Pangram
     sanitized_str.chars.to_set.length == 26
   end
 
-  VERSIOn = 1
+  VERSION = 1
 end
