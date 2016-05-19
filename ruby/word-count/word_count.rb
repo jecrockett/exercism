@@ -2,8 +2,7 @@ require 'pry'
 
 class Phrase
   def initialize(input)
-    @input = input.gsub(',', ' ').gsub(/[^ a-zA-Z0-9']/, '').downcase
-
+    @input = sanitize(input)
     remove_quotes
   end
 
@@ -14,9 +13,15 @@ class Phrase
     end
   end
 
-  def remove_quotes
-    @input = @input.gsub(" '", " ").gsub("' ", " ")
-  end
+  private
+
+    def sanitize(input)
+      input.gsub(',', ' ').gsub(/[^ a-zA-Z0-9']/, '').downcase
+    end
+
+    def remove_quotes
+      @input = @input.gsub(" '", " ").gsub("' ", " ")
+    end
 
   VERSION = 1
 end
