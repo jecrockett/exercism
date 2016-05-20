@@ -7,23 +7,21 @@ module FoodChain
     previous_animal = nil
     starting_verse = ["", nil, "I don't know why she swallowed the fly. Perhaps she'll die.", "\n"]
 
+    self.create_verses(output, starting_verse, previous_animal)
+
+    output
+  end
+
+  def self.create_verses(output, starting_verse, prev_animal)
     self.animals.each_with_object(starting_verse) do |animal, verse|
       verse[0] = "I know an old lady who swallowed a #{animal}."
       verse[1] = self.add_comment(animal)
-
-      verse.insert(2, self.add_newly_swallowed(animal, previous_animal)) unless (animal == 'fly')
-      verse[2].insert(-2, " that wriggled and jiggled and tickled inside her") if animal == 'bird'
+      self.insert_newly_swallowed(verse, animal, prev_animal)
       verse = verse.first(2).push("") if animal == 'horse'
 
+      prev_animal = animal
       output << verse.compact.join("\n")
-
-      previous_animal = animal
     end
-    puts "!!!!!!!!!!!!!!!!!!!!!\n" + output + "!!!!!!!!!!!!!!!!!!!!!!!"
-    output
-    # for animal in self.animals do
-    #
-    # end
   end
 
   def self.add_comment(animal)
@@ -39,8 +37,17 @@ module FoodChain
     end
   end
 
-  def self.add_newly_swallowed(animal, previous_animal)
+  def self.insert_newly_swallowed(verse, animal, previous_animal)
+    verse.insert(2, self.swallow_comment(animal, previous_animal)) unless (animal == 'fly')
+    self.spider_patch(verse) if animal == 'bird'
+  end
+
+  def self.swallow_comment(animal, previous_animal)
     "She swallowed the #{animal} to catch the #{previous_animal}."
+  end
+
+  def self.spider_patch(verse)
+    verse[2].insert(-2, " that wriggled and jiggled and tickled inside her")
   end
 
   def self.animals
