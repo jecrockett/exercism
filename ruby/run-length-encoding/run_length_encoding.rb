@@ -5,25 +5,41 @@ module RunLengthEncoding
   def self.encode(input)
     output = ''
     occurances = 1
-    previous = nil
 
-    input.chars.each do |letter|
-      binding.pry
-      if previous.nil?
-      elsif previous == letter
+    input.length.times do |i|
+      if input[i] == input[i + 1]
         occurances += 1
       else
-        binding.pry
-        if occurances == 1
-          output << previous
-        else
-          output << "#{occurances}#{previous}"
-          occurances = 1
-        end
+        occurances == 1 ?
+          output << input[i] :
+          output << "#{occurances}#{input[i]}"
+        occurances = 1
       end
-      previous = letter
     end
     output
   end
 
+  def self.decode(input)
+    output = ''
+    number = "1"
+    previous_is_number = false
+
+    input.length.times do |i|
+      if input[i].to_i > 0
+        previous_is_number ?
+          number << input[i] :
+          number = input[i]
+
+        previous_is_number = true
+      else
+        output << input[i] * number.to_i
+
+        number = "1"
+        previous_is_number = false
+      end
+    end
+    output
+  end
+
+VERSION = 1
 end
