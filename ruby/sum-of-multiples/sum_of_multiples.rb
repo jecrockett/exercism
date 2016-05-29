@@ -15,7 +15,7 @@ class SumOfMultiples
         val += num
       end
     end
-    multiples.compact.reduce(:+) || 0
+    multiples.compact.uniq.reduce(:+) || 0
   end
 
 end

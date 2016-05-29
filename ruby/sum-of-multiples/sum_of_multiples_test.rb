@@ -17,7 +17,6 @@ class SumTest < Minitest::Test
   end
 
   def test_sum_to_100
-    skip
     assert_equal 2_318, SumOfMultiples.new(3, 5).to(100)
   end
 
