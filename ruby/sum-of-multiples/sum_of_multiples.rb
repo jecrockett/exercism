@@ -6,16 +6,20 @@ class SumOfMultiples
     @numbers = numbers
   end
 
-  def to(upper_limit)
+  def to(limit)
     multiples = []
+    add_to(multiples, limit)
+    multiples.compact.uniq.reduce(:+) || 0
+  end
+
+  def add_to(multiples, limit)
     @numbers.each do |num|
       val = num
-      while val < upper_limit do
+      while val < limit do
         multiples << val
         val += num
       end
     end
-    multiples.compact.uniq.reduce(:+) || 0
   end
 
 end
