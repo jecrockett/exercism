@@ -5,12 +5,10 @@ require_relative 'sum_of_multiples'
 
 class SumTest < Minitest::Test
   def test_sum_to_1
-    skip
     assert_equal 0, SumOfMultiples.new(3, 5).to(1)
   end
 
   def test_sum_to_3
-    skip
     assert_equal 3, SumOfMultiples.new(3, 5).to(4)
   end
 
