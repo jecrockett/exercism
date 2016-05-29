@@ -1,3 +1,5 @@
+require 'pry'
+
 class SumOfMultiples
 
   def initialize(*numbers)
@@ -5,11 +7,12 @@ class SumOfMultiples
   end
 
   def to(upper_limit)
-    multiples = @numbers.map do |num|
+    multiples = []
+    @numbers.each do |num|
       val = num
       while val < upper_limit do
-        return val
-        val + num
+        multiples << val
+        val += num
       end
     end
     multiples.compact.reduce(:+) || 0
