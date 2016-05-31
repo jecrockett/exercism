@@ -1,25 +1,28 @@
 function Isogram(string){
   this.input = this.sanitize(string);
-  this.letters = [];
+  this.letters = '';
 }
 
 Isogram.prototype = {
   isIsogram: function() {
 
     for(var i = 0; i < this.input.length; i++) {
-      if letterIsDuplicated() {
+      var nextLetter = this.input[i].toLowerCase();
+
+      if (this.letters.includes(nextLetter)) {
         return false;
       }
 
-      letters.push(this.input[i].toLowerCase());
+      this.recordLetter(nextLetter);
     }
 
     return true;
   },
 
-  letterIsDuplicated: function() {
-    (letters.includes(this.input[i]))
-  }
+  recordLetter: function(newLetter) {
+    this.letters += newLetter;
+  },
+
   sanitize: function(string) {
     return string.replace(/-|\s/g,"");
   }
