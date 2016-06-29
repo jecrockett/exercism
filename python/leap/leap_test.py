@@ -2,7 +2,6 @@ import unittest
 
 from year import is_leap_year
 
-
 class YearTest(unittest.TestCase):
     def test_leap_year(self):
         self.assertIs(is_leap_year(1996), True)
